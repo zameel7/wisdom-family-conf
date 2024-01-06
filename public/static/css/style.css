@@ -1,0 +1,14 @@
+.container {
+    min-height: 80vh;
+    padding: 20px;
+}
+
+#hero-section {
+    margin-top: 10rem;
+}
+
+@media (max-width: 768px) {
+    #hero-section {
+        margin-top: 5rem;
+    }
+}

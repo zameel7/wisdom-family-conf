@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>Wisdom Youth Family Conference | May 12</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="../static/images/wisdom_islamic_org.png" type="image/x-icon">
-    <link rel="icon" href="../static/images/wisdom_islamic_org.png" type="image/x-icon">
+    <link rel="shortcut icon" href="static/images/wisdom_islamic_org.png" type="image/x-icon">
+    <link rel="icon" href="static/images/wisdom_islamic_org.png" type="image/x-icon">
     <!-- favicon -->
 
     <!-- update the version number as needed -->
@@ -30,6 +30,7 @@
 
     <!-- Setup bootstrap 4 with cdn-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/style.css">
 
     <style media="screen">
       body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
@@ -42,40 +43,83 @@
       #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
       @media (max-width: 600px) {
         body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <img src="../static/images/Family.png" alt="logo" class="img-fluid mx-auto d-block">
-          <h1 class="text-center">Wisdom Youth Family Conference</h1>
-          <h2 class="text-center">May 12</h2>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="static/images/wisdom_islamic_org.png" width="150" class="d-inline-block align-top mx-auto" alt="">
+      </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="container" id="hero-section">
+      <img src="static/images/Family.png" alt="logo" class="img-fluid mx-auto d-block mb-5" style="max-width: 20rem;">
+      <h2 class="text-center font-weight-bold">Wisdom Youth Family Conference</h1>
+      <h4 class="text-center">May 12 | Kanhangad</h2>
+
+      <!-- Registration Form Button -->
+      <div class="row justify-content-center">
+        <div class="col-md-3">
+          <!-- Button that opens a modal with registration form connected to firebase firestore -->
+          <button type="button" class="btn btn-primary btn-lg btn-block mt-3" data-toggle="modal" data-target="#registrationModal">
+            Register Now
+          </button>
         </div>
       </div>
     </div>
 
-    <p id="load">Loading&hellip;</p>
+    <!-- Registration Modal -->
+    <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="registrationModalLabel">Registration Form</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form id="registrationForm">
+                      <div class="form-group">
+                          <label for="name">Name:</label>
+                          <input type="text" class="form-control" id="name" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="age">Age:</label>
+                          <input type="number" class="form-control" id="age" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="contact">Contact:</label>
+                          <input type="text" class="form-control" id="contact" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="unit">Unit:</label>
+                          <input type="text" class="form-control" id="unit" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="zone">Zone:</label>
+                          <input type="text" class="form-control" id="zone" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="wisdomMember">Wisdom Member:</label>
+                          <select class="form-control" id="wisdomMember">
+                              <option value="true">Yes</option>
+                              <option value="false">No</option>
+                          </select>
+                      </div>
+                      <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
         try {
           let app = firebase.app();
@@ -96,6 +140,32 @@
           loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
         }
       });
+      function submitForm() {
+          // Get form values
+          const name = document.getElementById('name').value;
+          const age = document.getElementById('age').value;
+          const contact = document.getElementById('contact').value;
+          const unit = document.getElementById('unit').value;
+          const zone = document.getElementById('zone').value;
+          const wisdomMember = document.getElementById('wisdomMember').value === 'true';
+
+          // Add data to Firestore
+          db.collection('individual').add({
+              name: name,
+              age: age,
+              contact: contact,
+              unit: unit,
+              zone: zone,
+              wisdomMember: wisdomMember
+          })
+          .then((docRef) => {
+              console.log("Document written with ID: ", docRef.id);
+              // You can add any additional logic or UI changes here
+          })
+          .catch((error) => {
+              console.error("Error adding document: ", error);
+          });
+      }
     </script>
     
     <!-- Bootstrap JS and JQuery -->
