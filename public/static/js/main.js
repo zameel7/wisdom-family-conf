@@ -45,11 +45,10 @@ function updateFamilyMembersDetails() {
 
     familyMembersDetails.innerHTML = ""; // Clear previous content
 
-    for (var i = 1; i <= numberOfMembers; i++) {
+    for (var i = 0; i < numberOfMembers; i++) {
         var memberDetails = document.createElement("div");
         memberDetails.innerHTML =
-            "<h5>Family Member " +
-            i +
+            `<h5>Family Member ${i+1}` +
             ":</h5>" +
             "<div class='form-group'><label for='name" +
             i +
@@ -136,7 +135,7 @@ function submitForm() {
             const transportMode =
                 document.getElementById("transportMode").value;
             const numberOfMembers =
-                document.getElementById("numberOfMembers").value;
+                parseInt(document.getElementById("numberOfMembers").value);
 
             // Add family members to Firestore with the same family registration number
             const familyMembers = [];
@@ -173,7 +172,7 @@ function submitForm() {
                             })
                             .catch((error) => {
                                 console.error(
-                                    "Error adding family member document: ",
+                                    `Error adding family member document of ${memberRegistrationNumber}_${i+1}: `,
                                     error
                                 );
                                 showErrorScreen();
