@@ -213,14 +213,6 @@ function submitForm() {
                 return;
             }
 
-            // Validate mobile number
-            if (!validateMobileNumber(contact)) {
-                alert('Please enter a valid mobile number.');
-                document.getElementById("main-disp").style.display = "block";
-                document.getElementById("secondary-disp").style.display = "none";
-                return;
-            }
-
             // Add family members to Firestore with the same family registration number
             const familyMembers = [];
             // Generate a unique registration number for each family member
@@ -231,6 +223,14 @@ function submitForm() {
                         const memberAge = document.getElementById(`age${i}`).value;
                         const memberContact = document.getElementById(`contact${i}`).value;
                         const memberWisdomMember = document.getElementById(`wisdomMember${i}`).value === "true";
+            
+                        // Validate mobile number
+                        if (!validateMobileNumber(memberContact)) {
+                            alert('Please enter a valid mobile number.');
+                            document.getElementById("main-disp").style.display = "block";
+                            document.getElementById("secondary-disp").style.display = "none";
+                            return;
+                        }
 
                         const regNo = i !== 0 ? `${memberRegistrationNumber}_${i}` : memberRegistrationNumber;
 
