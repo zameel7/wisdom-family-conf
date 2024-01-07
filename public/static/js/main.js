@@ -252,11 +252,19 @@ function submitForm() {
                             db.collection("regno").doc(`${regNo}`).set({
                                 regNo: regNo
                             })
-                            familyMembers.push({
-                                name: memberName,
-                                registrationNumber:
-                                    `${memberRegistrationNumber}_${i+1}`,
-                            });
+                            if (i === 0) {
+                                // Add the head of the family to the list of family members
+                                familyMembers.push({
+                                    name: memberName,
+                                    registrationNumber: memberRegistrationNumber,
+                                });
+                            } else {
+                                familyMembers.push({
+                                    name: memberName,
+                                    registrationNumber:
+                                        `${memberRegistrationNumber}_${i}`,
+                                });
+                            }
                             console.log("Family member added successfully");
                         })
                         .catch((error) => {
