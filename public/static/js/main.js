@@ -65,7 +65,13 @@ function updateFamilyMembersDetails() {
             i +
             "'>Contact:</label><input type='text' class='form-control' id='contact" +
             i +
-            "' required></div>";
+            "' required></div>" +
+            "<div class='form-group'><label for='wisdomMember" +
+            i +
+            "'>Wisdom Member:</label><select class='form-control' id='wisdomMember" +
+            i +
+            "' required><option value='true'>Yes</option><option value='false'>No</option></select></div>" +
+            "<hr>";
 
         familyMembersDetails.appendChild(memberDetails);
     }
@@ -134,19 +140,18 @@ function submitForm() {
 
             // Add family members to Firestore with the same family registration number
             const familyMembers = [];
-            for (let i = 1; i <= numberOfMembers; i++) {
-                const memberName = document.getElementById(`name${i}`).value;
-                const memberAge = document.getElementById(`age${i}`).value;
-                const memberContact = document.getElementById(
-                    `contact${i}`
-                ).value;
+            // Generate a unique registration number for each family member
+            generateUniqueRegistrationNumber()
+                .then((memberRegistrationNumber) => {
+                    for (let i = 0; i <= numberOfMembers; i++) {
+                        const memberName = document.getElementById(`name${i}`).value;
+                        const memberAge = document.getElementById(`age${i}`).value;
+                        const memberContact = document.getElementById(`contact${i}`).value;
+                        const memberWisdomMember = document.getElementById(`wisdomMember${i}`).value === "true";
 
-                // Generate a unique registration number for each family member
-                generateUniqueRegistrationNumber()
-                    .then((memberRegistrationNumber) => {
                         // Add family member data to Firestore with custom document ID
                         db.collection("registrations")
-                            .doc(`${memberRegistrationNumber}`)
+                            .doc(`${memberRegistrationNumber}_${i+1}`)
                             .set({
                                 name: memberName,
                                 age: memberAge,
@@ -156,12 +161,13 @@ function submitForm() {
                                 zone: zone,
                                 transportMode: transportMode,
                                 numberOfMembers: numberOfMembers,
+                                wisdomMember: memberWisdomMember
                             })
                             .then(() => {
                                 familyMembers.push({
                                     name: memberName,
                                     registrationNumber:
-                                        memberRegistrationNumber,
+                                        `${memberRegistrationNumber}_${i+1}`,
                                 });
                                 console.log("Family member added successfully");
                             })
@@ -170,17 +176,17 @@ function submitForm() {
                                     "Error adding family member document: ",
                                     error
                                 );
-                            });
-
-                        // If this is the last family member, show success screen
-                        if (i === numberOfMembers) {
-                            showSuccessScreen(familyMembers);
-                        }
-                    })
-                    .catch(() => {
-                        showErrorScreen();
-                    });
-            }
+                                showErrorScreen();
+                            }
+                        );
+                    }
+                    showSuccessScreen(familyMembers);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    showErrorScreen();
+                });
+            
         }
     } catch (error) {
         console.error(error);
@@ -191,7 +197,6 @@ function submitForm() {
 // Function to generate a unique 5-digit registration number
 async function generateUniqueRegistrationNumber() {
     const min = 1000;
-    const max = 9999;
     let registrationNumber;
 
     // Try generating a unique registration number up to 10 times
@@ -223,13 +228,8 @@ function showLoadingScreen() {
     // Update modal content to show a loading screen
     // You can customize this based on your UI design
     document.getElementById("main-disp").style.display = "none";
-    document.getElementById("registrationForm").style.display = "none";
 
     // Show the secondary display with the loading screen
-    // <div class="spinner-border" role="status">
-    // <span class="sr-only">Loading...</span>
-    // </div>
-    // <p id="load">Please wait while we are processing your request!</p>
     document.getElementById("secondary-disp").style.display = "block";
     document.getElementById("secondary-disp").innerHTML = `
                     <div class="spinner-border" role="status">
@@ -246,6 +246,13 @@ function showSuccessScreen(registrationDetails) {
     
     const successContent = `
 					<ul id="registrationDetailsList"></ul>
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        onclick="formReset()"
+                    >
+                        Close
+                    </button>
 				`;
 
     document.getElementById("registrationModalLabel").innerText =
