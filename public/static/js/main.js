@@ -223,18 +223,34 @@ function showLoadingScreen() {
     // Update modal content to show a loading screen
     // You can customize this based on your UI design
     document.getElementById("main-disp").style.display = "none";
-    document.getElementById("loading-disp").style.display = "block";
+    document.getElementById("registrationForm").style.display = "none";
+
+    // Show the secondary display with the loading screen
+    // <div class="spinner-border" role="status">
+    // <span class="sr-only">Loading...</span>
+    // </div>
+    // <p id="load">Please wait while we are processing your request!</p>
+    document.getElementById("secondary-disp").style.display = "block";
+    document.getElementById("secondary-disp").innerHTML = `
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div> 
+                    <p id="load">Please wait while we are processing your request!</p>
+                `;
 }
 
 function showSuccessScreen(registrationDetails) {
     // Update modal content to show a success screen
+    document.getElementById("main-disp").style.display = "none";
+    document.getElementById("secondary-disp").style.display = "block";
+    
     const successContent = `
 					<ul id="registrationDetailsList"></ul>
 				`;
 
     document.getElementById("registrationModalLabel").innerText =
         "Registration Successful";
-    document.getElementById("modal-body").innerHTML = successContent;
+    document.getElementById("secondary-disp").innerHTML = successContent;
 
     const detailsList = document.getElementById("registrationDetailsList");
 
@@ -247,10 +263,28 @@ function showSuccessScreen(registrationDetails) {
 
 function showErrorScreen() {
     // Update modal content to show an error screen
+    document.getElementById("main-disp").style.display = "none";
+    document.getElementById("secondary-disp").style.display = "block";
+
     const errorContent = `
-					<p>Sorry, there was an error processing your registration. Please try again later.</p>
+					<p>Sorry, there was an error processing your registration.<br> Please try again later.</p>
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        onclick="formReset()"
+                    >
+                        Close
+                    </button>
 				`;
     document.getElementById("registrationModalLabel").innerText =
         "Registration Failed";
-    document.getElementById("modal-body").innerHTML = errorContent;
+    document.getElementById("secondary-disp").innerHTML = errorContent;
+}
+
+function formReset() {
+    // Reset the form to its initial state
+    document.getElementById("registrationForm").reset();
+    document.getElementById("registrationModalLabel").innerText = "Registration Form";
+    document.getElementById("main-disp").style.display = "block";
+    document.getElementById("secondary-disp").style.display = "none";
 }
