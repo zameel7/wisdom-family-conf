@@ -1,3 +1,15 @@
+body {
+    background: #ffffff;
+    color: rgba(0, 0, 0, 0.87);
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    margin-bottom: 2rem;
+}
+
 .container {
     min-height: 80vh;
 }

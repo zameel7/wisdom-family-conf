@@ -178,6 +178,9 @@ function submitForm() {
                             isFamily: false
                         })
                         .then(() => {
+                            db.collection("regno").doc(`${registrationNumber}`).set({
+                                regNo: registrationNumber
+                            })
                             showSuccessScreen([
                                 {
                                     name: name,
@@ -246,6 +249,9 @@ function submitForm() {
                             wisdomMember: memberWisdomMember
                         })
                         .then(() => {
+                            db.collection("regno").doc(`${regNo}`).set({
+                                regNo: regNo
+                            })
                             familyMembers.push({
                                 name: memberName,
                                 registrationNumber:
@@ -288,7 +294,7 @@ async function generateUniqueRegistrationNumber() {
         try {
             // Check if the generated number already exists in Firestore
             const docRef = db
-                .collection("registrations")
+                .collection("regno")
                 .doc(`${registrationNumber}`);
             const docSnapshot = await docRef.get();
 
@@ -333,8 +339,16 @@ function showSuccessScreen(registrationDetails) {
             <p class="mt-2">സമ്മേളന നഗരിയിൽ വച്ച് കാണാം എന്ന പ്രാർത്ഥനയോടെ...</p>
             <p>സ്നേഹിതർക്കു കൂടി ഈ പരിപാടി പരിചയപ്പെടുത്തിക്കൊടുക്കാൻ മറക്കല്ലേ!</p>
             <hr>
+            <div id="ticket" style="display: none;">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading font-weight-bold">Registration has been successful!</h4>
+                    <ul id="registrationDetailsListTicket" class="list-group"></ul>
+                    <p class="mt-2">Here is your ticket for the event</p>
+                </div>
+            </div>
             <button type="button" class="btn btn-primary" onclick="">Donate to Da'wa</button>
             <button type="button" class="btn btn-primary" onclick="formReset()">Register More</button>
+            <button type="button" class="btn btn-primary" onclick="downloadAsPNG()">Download Ticket</button>
         </div>
     `;
 
@@ -342,14 +356,47 @@ function showSuccessScreen(registrationDetails) {
     document.getElementById("secondary-disp").innerHTML = successContent;
 
     const detailsList = document.getElementById("registrationDetailsList");
+    const detailsListTicket = document.getElementById("registrationDetailsListTicket");
 
     registrationDetails.forEach((detail) => {
         const listItem = document.createElement("li");
         listItem.classList.add("list-group-item");
-        listItem.textContent = `${detail.name}: <bold>${detail.registrationNumber}</bold>`;
+        listItem.textContent = `${detail.name}: ${detail.registrationNumber}`;
         detailsList.appendChild(listItem);
+        detailsListTicket.appendChild(listItem.cloneNode(true));
     });
 }
+
+function downloadAsPNG() {
+    // Get the content of the "registrationDetailsList" element
+    const content = document.getElementById("ticket");
+    content.style.display = "block";
+
+    // Use html2canvas to capture the content as an image
+    html2canvas(content).then((canvas) => {
+        // Convert the canvas to an image URL
+        const imgData = canvas.toDataURL("image/png");
+
+        const link = document.createElement("a");
+
+        // Set the download attribute with a filename
+        link.download = "registration_success.png";
+
+        // Set the href attribute with the data URL
+        link.href = imgData;
+
+        // Append the link to the document
+        document.body.appendChild(link);
+
+        // Trigger a click on the link to initiate the download
+        link.click();
+
+        // Remove the link from the document
+        document.body.removeChild(link);
+    });
+    content.style.display = "none";
+}
+
 
 function showErrorScreen() {
     // Update modal content to show an error screen

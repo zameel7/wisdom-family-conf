@@ -11,6 +11,7 @@
             content="Wisdom Kasaragod Family Conference | May 12"
         />
         <meta property="og:image" content="static/images/hero.jpg" />
+        <meta property="og:title" content="Wisdom Kasaragod Family Conference | May 12" />
 
         <!-- favicon -->
         <link
@@ -24,6 +25,16 @@
             type="image/x-icon"
         />
         <!-- favicon -->
+
+        <!-- Include jsPDF library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+        <!-- Include html2canvas library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
+        <!-- Include dompurify library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js"></script>
+
 
         <!-- update the version number as needed -->
         <script defer src="/__/firebase/10.7.1/firebase-app-compat.js"></script>
@@ -81,15 +92,6 @@
 
         <!-- Local styling -->
         <link rel="stylesheet" href="static/css/style.css" />
-        <style media="screen">
-            body {
-                background: #ffffff;
-                color: rgba(0, 0, 0, 0.87);
-                font-family: Roboto, Helvetica, Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-            }
-        </style>
     </head>
 
     <body>
@@ -117,6 +119,7 @@
                 Kasaragod District Family Conference
             </h2>
             <h4 class="text-center">Sunday, May 12 | 4:00 PM | Kanhangad</h4>
+            <h6 class="text-center text-muted mt-3">Contact Us: <a href="callto:+917012009662">7012009662</a> | <a href="callto:+919400407310">9400407310</a></h6>
 
             <!-- Registration Form Button -->
             <div class="row justify-content-center">
@@ -274,12 +277,12 @@
                                     ></select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="transportMode"
+                                    <label for="itransportMode"
                                         >Transport Mode:</label
                                     >
                                     <select 
                                         class="form-control" 
-                                        id="transportMode"
+                                        id="itransportMode"
                                         required
                                     >
                                         <option value="Public Transport">Public Transport</option>

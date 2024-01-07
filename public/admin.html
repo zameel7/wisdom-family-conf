@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Wisdom Kasaragod Family Conference | May 12</title>
+
+        <!-- Meta description for the website -->
+        <meta
+            name="description"
+            content="Wisdom Kasaragod Family Conference | May 12"
+        />
+        <meta property="og:image" content="static/images/hero.jpg" />
+        <meta
+            property="og:title"
+            content="Wisdom Kasaragod Family Conference | May 12"
+        />
+
+        <!-- favicon -->
+        <link
+            rel="shortcut icon"
+            href="static/images/wisdom_islamic_org.png"
+            type="image/x-icon"
+        />
+        <link
+            rel="icon"
+            href="static/images/wisdom_islamic_org.png"
+            type="image/x-icon"
+        />
+        <!-- favicon -->
+
+        <!-- update the version number as needed -->
+        <script defer src="/__/firebase/10.7.1/firebase-app-compat.js"></script>
+        <!-- include only the Firebase features as you need -->
+        <script
+            defer
+            src="/__/firebase/10.7.1/firebase-auth-compat.js"
+        ></script>
+        <script
+            defer
+            src="/__/firebase/10.7.1/firebase-database-compat.js"
+        ></script>
+        <script
+            defer
+            src="/__/firebase/10.7.1/firebase-firestore-compat.js"
+        ></script>
+        <script
+            defer
+            src="/__/firebase/10.7.1/firebase-functions-compat.js"
+        ></script>
+        <script
+            defer
+            src="/__/firebase/10.7.1/firebase-messaging-compat.js"
+        ></script>
+        <script
+            defer
+            src="/__/firebase/10.7.1/firebase-storage-compat.js"
+        ></script>
+        <script
+            defer
+            src="/__/firebase/10.7.1/firebase-analytics-compat.js"
+        ></script>
+        <script
+            defer
+            src="/__/firebase/10.7.1/firebase-remote-config-compat.js"
+        ></script>
+        <script
+            defer
+            src="/__/firebase/10.7.1/firebase-performance-compat.js"
+        ></script>
+        <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+        <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+        <!-- Setup bootstrap 4 with cdn-->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <link
+            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- Local styling -->
+        <link rel="stylesheet" href="static/css/style.css" />
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img
+                    src="static/images/wisdom_islamic_org.png"
+                    width="150"
+                    class="d-inline-block align-top mx-auto"
+                    alt=""
+                />
+            </a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <button class="btn btn-danger" onclick="logout()">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container container-fluid">
+            <div class="row mt-4 mb-2">
+                <div class="col-lg-12">
+                    <!-- Zone-wise Registration Counts -->
+                    <h3 class="font-weight-bold">Zone-wise Registration Counts</h3>
+                    <div class="card-columns" id="zoneRegistrationCounts">
+                        <!-- Zone registration counts will be appended here -->
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-12">
+                    <!-- Registration Details Table -->
+                    <h3 class="font-weight-bold">Registration Details</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Registration No.</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Contact</th>
+                                <th>Zone</th>
+                                <th>Transport Mode</th>
+                                <th>Unit</th>
+                                <th>Family</th>
+                                <th>Wisdom Member</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrationTableBody">
+                            <!-- Registration details will be appended here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- JS -->
+        <script src="static/js/admin.js"></script>
+
+        <!-- Bootstrap JS and JQuery -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"
+        ></script>
+        <!-- Bootstrap JS and JQuery -->
+    </body>
+</html>
