@@ -21,3 +21,9 @@ nav {
 footer a {
     color: black;
 }
+
+@media screen and (max-width: 600px) {
+    #hero-section {
+        margin-top: 5rem;
+    }
+}

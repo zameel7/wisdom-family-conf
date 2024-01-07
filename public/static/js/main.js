@@ -367,9 +367,9 @@ function showSuccessScreen(registrationDetails) {
                     <p class="mt-2">Here is your ticket for the event</p>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" onclick="">Donate to Da'wa</button>
-            <button type="button" class="btn btn-primary" onclick="formReset()">Register More</button>
-            <button type="button" class="btn btn-primary" onclick="downloadAsPNG()">Download Ticket</button>
+            <button type="button" class="btn btn-primary mt-2" onclick="window.location.href = 'upi://pay?pa=mynameiszam7@oksbi&cu=INR'">Donate to Da'wa</button>
+            <button type="button" class="btn btn-primary mt-2" onclick="formReset()">Register More</button>
+            <button type="button" class="btn btn-primary mt-2" onclick="downloadAsPNG()">Download Ticket</button>
         </div>
     `;
 
