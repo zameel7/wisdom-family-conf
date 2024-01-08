@@ -341,6 +341,7 @@ function showLoadingScreen() {
 }
 
 function showSuccessScreen(registrationDetails) {
+    registrationDetails = registrationDetails || [{ name: "Test", registrationNumber: "12345"}];
     // Update modal content to show a success screen
     document.getElementById("main-disp").style.display = "none";
     document.getElementById("secondary-disp").style.display = "block";
@@ -357,6 +358,7 @@ function showSuccessScreen(registrationDetails) {
                     <h4 class="alert-heading font-weight-bold">Registration has been successful!</h4>
                     <ul id="registrationDetailsListTicket" class="list-group"></ul>
                     <p class="mt-2">Here is your ticket for the event</p>
+                    <div id="qrcode-container" class="mb-3 centered-qrcode"></div>
                 </div>
             </div>
             <button type="button" class="btn btn-primary mt-2" onclick="window.location.href = 'https://chat.whatsapp.com/GvlImRUMb2lLBXaslgw7hY'">Join WhatsApp Group</button>
@@ -367,6 +369,16 @@ function showSuccessScreen(registrationDetails) {
 
     document.getElementById("registrationModalLabel").innerText = "Registration Successful!";
     document.getElementById("secondary-disp").innerHTML = successContent;
+
+    const QRElement = document.getElementById("qrcode-container");
+    
+    new QRCode(QRElement, {
+        text: JSON.stringify(registrationDetails),
+        width: 100,
+        height: 100,
+        colorDark : "black",
+        colorLight : "#d4edda",
+    });
 
     const detailsList = document.getElementById("registrationDetailsList");
     const detailsListTicket = document.getElementById("registrationDetailsListTicket");
