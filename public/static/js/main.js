@@ -179,7 +179,8 @@ function submitForm() {
                         })
                         .then(() => {
                             db.collection("regno").doc(`${registrationNumber}`).set({
-                                regNo: registrationNumber
+                                regNo: registrationNumber,
+                                attendance: false
                             })
                             showSuccessScreen([
                                 {

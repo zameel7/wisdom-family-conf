@@ -96,11 +96,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 zoneCountsElement.appendChild(zoneCard);
             });
+
+            function domReady(fn) {
+                if (
+                    document.readyState === "complete" ||
+                    document.readyState === "interactive"
+                ) {
+                    setTimeout(fn, 1000);
+                } else {
+                    document.addEventListener("DOMContentLoaded", fn);
+                }
+            }
+
+            domReady(function () {
+                // If found you qr code
+                function onScanSuccess(decodeText, decodeResult) {
+                    var result = JSON.parse(decodeText);
+                    result.forEach((data) => {
+                        const registrationNumber = data.registrationNumber;
+                        console.log(registrationNumber);
+                        if (registrationNumber) {
+                            markAttendance(registrationNumber);
+                        }
+                    });
+                }
+
+                let htmlscanner = new Html5QrcodeScanner("qr-reader", {
+                    fps: 10,
+                    qrbos: 250,
+                });
+                htmlscanner.render(onScanSuccess);
+            });
         }
     } catch (e) {
         console.error(e);
     }
 });
+
+function markAttendance(registrationNumber) {
+    var db = firebase.firestore();
+    db.collection("regno").doc(registrationNumber).set(
+        {attendance: true,},{ merge: true }
+    )
+    .then(alert("Attendance marked successfully"))
+    .catch((error) => {
+        console.error("Error writing document: ", error);
+    });
+}
 
 // Logout function
 function logout() {
