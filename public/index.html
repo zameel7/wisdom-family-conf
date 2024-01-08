@@ -123,43 +123,45 @@
             </nav>
 
             <!-- Hero Section -->
-            <div class="container" id="hero-section">
-                <img
-                    src="static/images/Family.png"
-                    alt="logo"
-                    id="hero-logo"
-                    class="img-fluid mx-auto d-block mb-5"
-                    style="max-width: 20rem"
-                />
-                <div class="text-center mx-auto text-dark" id="hero-text">
-                    <h2 class="text-center font-weight-bold">
-                        Kasaragod District Family Conference
-                    </h2>
-                    <h4 class="text-center">
-                        Sunday, May 12 | 4:00 PM | Kanhangad
-                    </h4>
-                    <h6 class="text-center mt-3">
-                        Contact Us:
-                        <a class="text-secondary" href="callto:+917012009662">7012009662</a> |
-                        <a class="text-secondary" href="callto:+919400407310">9400407310</a>
-                    </h6>
-                </div>
+            <section>
+                <div class="container" id="hero-section">
+                    <img
+                        src="static/images/Family.png"
+                        alt="logo"
+                        id="hero-logo"
+                        class="img-fluid mx-auto d-block mb-5"
+                        style="max-width: 20rem"
+                    />
+                    <div class="text-center mx-auto text-dark" id="hero-text">
+                        <h2 class="text-center font-weight-bold">
+                            Kasaragod District Family Conference
+                        </h2>
+                        <h4 class="text-center">
+                            Sunday, May 12 | 4:00 PM | Kanhangad
+                        </h4>
+                        <h6 class="text-center mt-3">
+                            Contact Us:
+                            <a class="text-secondary" href="callto:+917012009662">7012009662</a> |
+                            <a class="text-secondary" href="callto:+919400407310">9400407310</a>
+                        </h6>
+                    </div>
 
-                <!-- Registration Form Button -->
-                <div class="row justify-content-center">
-                    <div class="col-md-3">
-                        <!-- Button that opens a modal with registration form connected to firebase firestore -->
-                        <button
-                            type="button"
-                            class="btn btn-primary btn-lg btn-block mt-3"
-                            data-toggle="modal"
-                            data-target="#registrationModal"
-                        >
-                            Register Now
-                        </button>
+                    <!-- Registration Form Button -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-3">
+                            <!-- Button that opens a modal with registration form connected to firebase firestore -->
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-lg btn-block mt-3"
+                                data-toggle="modal"
+                                data-target="#registrationModal"
+                            >
+                                Register Now
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Registration Modal -->
             <div
@@ -347,7 +349,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Footer -->
             <footer class="pt-3 pb-2 text-muted text-center text-small">
                 <p class="mb-1">
@@ -395,5 +397,21 @@
             crossorigin="anonymous"
         ></script>
         <!-- Bootstrap JS and JQuery -->
+
+        <script>
+            // Add an event listener to execute when the modal is shown
+            $('#registrationModal').on('show.bs.modal', function () {
+                $('nav').addClass('blur-background');
+                $('section').addClass('blur-background');
+                $('footer').addClass('blur-background');
+            });
+
+            // Add an event listener to execute when the modal is hidden
+            $('#registrationModal').on('hidden.bs.modal', function () {
+                $('nav').removeClass('blur-background');
+                $('section').removeClass('blur-background');
+                $('footer').removeClass('blur-background');
+            });
+        </script>
     </body>
 </html>

@@ -347,7 +347,7 @@ function showSuccessScreen(registrationDetails) {
     
     const successContent = `
         <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading font-weight-bold">സമ്മേളന രെജിസ്ട്രേഷൻ പൂർത്തിയായിരിക്കുന്നു!</h4>
+            <h4 class="alert-heading font-weight-bold">Your Registration is Completed!</h4>
             <ul id="registrationDetailsList" class="list-group"></ul>
             <p class="mt-2">സമ്മേളന നഗരിയിൽ വച്ച് കാണാം എന്ന പ്രാർത്ഥനയോടെ...</p>
             <p>സ്നേഹിതർക്കു കൂടി ഈ പരിപാടി പരിചയപ്പെടുത്തിക്കൊടുക്കാൻ മറക്കല്ലേ!</p>
@@ -359,7 +359,7 @@ function showSuccessScreen(registrationDetails) {
                     <p class="mt-2">Here is your ticket for the event</p>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary mt-2" onclick="window.location.href = 'upi://pay?pa=mynameiszam7@oksbi&cu=INR'">Donate to Da'wa</button>
+            <button type="button" class="btn btn-primary mt-2" onclick="window.location.href = 'https://chat.whatsapp.com/GvlImRUMb2lLBXaslgw7hY'">Join WhatsApp Group</button>
             <button type="button" class="btn btn-primary mt-2" onclick="formReset()">Register More</button>
             <button type="button" class="btn btn-primary mt-2" onclick="downloadAsPNG()">Download Ticket</button>
         </div>
