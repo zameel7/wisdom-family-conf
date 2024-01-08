@@ -216,7 +216,7 @@ function submitForm() {
             // Add family members to Firestore with the same family registration number
             const familyMembers = [];
 
-            for (let i = 0; i <= numberOfMembers; i++) {
+            for (let i = 0; i < numberOfMembers; i++) {
                 const memberContact = document.getElementById(`contact${i}`).value;
     
                 // Validate mobile number
@@ -231,19 +231,11 @@ function submitForm() {
             // Generate a unique registration number for each family member
             generateUniqueRegistrationNumber()
                 .then((memberRegistrationNumber) => {
-                    for (let i = 0; i <= numberOfMembers; i++) {
+                    for (let i = 0; i < numberOfMembers; i++) {
                         const memberName = document.getElementById(`name${i}`).value;
                         const memberAge = document.getElementById(`age${i}`).value;
                         const memberContact = document.getElementById(`contact${i}`).value;
                         const memberWisdomMember = document.getElementById(`wisdomMember${i}`).value === "true";
-            
-                        // Validate mobile number
-                        if (!validateMobileNumber(memberContact)) {
-                            alert('Please enter a valid mobile number.');
-                            document.getElementById("main-disp").style.display = "block";
-                            document.getElementById("secondary-disp").style.display = "none";
-                            return;
-                        }
 
                         const regNo = i !== 0 ? `${memberRegistrationNumber}_${i}` : memberRegistrationNumber;
 

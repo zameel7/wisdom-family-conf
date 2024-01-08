@@ -6,10 +6,6 @@ body {
     padding: 0;
 }
 
-nav {
-    margin-bottom: 2rem;
-}
-
 .container {
     min-height: 80vh;
 }
@@ -18,8 +14,45 @@ nav {
     margin-top: 10rem;
 }
 
-footer a {
-    color: black;
+#hero-text {
+    background-color: rgba(255, 255, 255, 0.793);
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.bg-img {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: block;
+    background-image: url('../images/bg.jpg');
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.content {
+    position: relative;
+    left: 0;
+    right: 0;
+    z-index: 9999 !important;
+}
+
+footer {
+    width: 100%;   
+}
+
+footer p, a {
+    color: white;
 }
 
 @media screen and (max-width: 600px) {

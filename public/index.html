@@ -19,7 +19,10 @@
             മുഴുവൻ സുമനസ്സുകളേയും സ്നേഹത്തോടെ കുടംബ സമേതം ക്ഷണിക്കുന്നു.."
         />
         <meta property="og:image" content="static/images/hero.jpg" />
-        <meta property="og:title" content="Wisdom Kasaragod Family Conference | May 12" />
+        <meta
+            property="og:title"
+            content="Wisdom Kasaragod Family Conference | May 12"
+        />
 
         <!-- favicon -->
         <link
@@ -42,7 +45,6 @@
 
         <!-- Include dompurify library -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js"></script>
-
 
         <!-- update the version number as needed -->
         <script defer src="/__/firebase/10.7.1/firebase-app-compat.js"></script>
@@ -96,232 +98,282 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous"
         />
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+        <link
+            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+        />
 
         <!-- Local styling -->
         <link rel="stylesheet" href="static/css/style.css" />
     </head>
 
     <body>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
+        <div class="bg-img"></div>
+        <div class="content">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">
+                    <img
+                        src="static/images/wisdom_islamic_org.png"
+                        width="150"
+                        class="d-inline-block align-top mx-auto"
+                        alt=""
+                    />
+                </a>
+            </nav>
+
+            <!-- Hero Section -->
+            <div class="container" id="hero-section">
                 <img
-                    src="static/images/wisdom_islamic_org.png"
-                    width="150"
-                    class="d-inline-block align-top mx-auto"
-                    alt=""
+                    src="static/images/Family.png"
+                    alt="logo"
+                    id="hero-logo"
+                    class="img-fluid mx-auto d-block mb-5"
+                    style="max-width: 20rem"
                 />
-            </a>
-        </nav>
-
-        <!-- Hero Section -->
-        <div class="container" id="hero-section">
-            <img
-                src="static/images/Family.png"
-                alt="logo"
-                class="img-fluid mx-auto d-block mb-5"
-                style="max-width: 20rem"
-            />
-            <h2 class="text-center font-weight-bold">
-                Kasaragod District Family Conference
-            </h2>
-            <h4 class="text-center">Sunday, May 12 | 4:00 PM | Kanhangad</h4>
-            <h6 class="text-center text-muted mt-3">Contact Us: <a href="callto:+917012009662">7012009662</a> | <a href="callto:+919400407310">9400407310</a></h6>
-
-            <!-- Registration Form Button -->
-            <div class="row justify-content-center">
-                <div class="col-md-3">
-                    <!-- Button that opens a modal with registration form connected to firebase firestore -->
-                    <button
-                        type="button"
-                        class="btn btn-primary btn-lg btn-block mt-3"
-                        data-toggle="modal"
-                        data-target="#registrationModal"
-                    >
-                        Register Now
-                    </button>
+                <div class="text-center mx-auto text-dark" id="hero-text">
+                    <h2 class="text-center font-weight-bold">
+                        Kasaragod District Family Conference
+                    </h2>
+                    <h4 class="text-center">
+                        Sunday, May 12 | 4:00 PM | Kanhangad
+                    </h4>
+                    <h6 class="text-center mt-3">
+                        Contact Us:
+                        <a class="text-secondary" href="callto:+917012009662">7012009662</a> |
+                        <a class="text-secondary" href="callto:+919400407310">9400407310</a>
+                    </h6>
                 </div>
-            </div>
-        </div>
 
-        <!-- Registration Modal -->
-        <div
-            class="modal fade"
-            id="registrationModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="registrationModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registrationModalLabel">
-                            Registration Form
-                        </h5>
+                <!-- Registration Form Button -->
+                <div class="row justify-content-center">
+                    <div class="col-md-3">
+                        <!-- Button that opens a modal with registration form connected to firebase firestore -->
                         <button
                             type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
+                            class="btn btn-primary btn-lg btn-block mt-3"
+                            data-toggle="modal"
+                            data-target="#registrationModal"
                         >
-                            <span aria-hidden="true">&times;</span>
+                            Register Now
                         </button>
-                    </div>
-                    <!-- Loading/Success/Error screen -->
-                    <div
-                        class="modal-body text-center"
-                        id="secondary-disp"
-                        style="display: none"
-                    ></div>
-
-                    <!-- Main Screen -->
-                    <div class="modal-body" id="main-disp">
-                        <div class="text-center">
-                            <button
-                                type="button"
-                                class="btn btn-primary mt-2"
-                                onclick="selectRegistrationType('individual')"
-                            >
-                                Individual Registration
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-primary mt-2"
-                                onclick="selectRegistrationType('family')"
-                            >
-                                Family Registration
-                            </button>
-                        </div>
-
-                        <form id="registrationForm" style="display: none">
-                            <div id="familyFields" style="display: none">
-                                <div class="form-group">
-                                    <label for="unit">Place:</label>
-                                    <select
-                                        class="form-control selectpicker"
-                                        data-live-search="true"
-                                        id="unit"
-                                        required
-                                    >
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="transportMode"
-                                        >Transport Mode:</label>
-                                    <select 
-                                        class="form-control" 
-                                        id="transportMode"
-                                        required
-                                    >
-                                        <option value="Public Transport">Public Transport</option>
-                                        <option value="Private Transport">Private Transport</option>
-                                        <option value="Transport assistance required">Transport assistance required</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="numberOfMembers"
-                                        >No. of Members</label
-                                    >
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        id="numberOfMembers"
-                                        required
-                                        oninput="updateFamilyMembersDetails()"
-                                    />
-                                </div>
-                                <div id="familyMembersDetails"></div>
-                            </div>
-
-                            <div id="individualFields" style="display: none">
-                                <div class="form-group">
-                                    <label for="name">Name:</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="name"
-                                        required
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="age">Age:</label>
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        id="age"
-                                        required
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="contact">Contact:</label>
-                                    <input
-                                        type="tel"
-                                        class="form-control"
-                                        id="contact"
-                                        required
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="iwisdomMember"
-                                        >Wisdom Member:</label
-                                    >
-                                    <select
-                                        class="form-control"
-                                        id="iwisdomMember"
-                                    >
-                                        <option value="true">Yes</option>
-                                        <option value="false">No</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="iunit">Place:</label>
-                                    <select
-                                        class="form-control selectpicker"
-                                        data-live-search="true"
-                                        id="iunit"
-                                        required
-                                    ></select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="itransportMode"
-                                        >Transport Mode:</label
-                                    >
-                                    <select 
-                                        class="form-control" 
-                                        id="itransportMode"
-                                        required
-                                    >
-                                        <option value="Public Transport">Public Transport</option>
-                                        <option value="Private Transport">Private Transport</option>
-                                        <option value="Transport assistance required">Transport assistance required</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <button
-                                type="button"
-                                class="btn btn-primary"
-                                onclick="submitForm()"
-                            >
-                                Submit
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Footer -->
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">© 2023 Wisdom Kasaragod | made by <a href="https://zameel7.me">zameel7</a></p>
-            <ul class="list-inline">
-              <li class="list-inline-item"><a href="https://www.instagram.com/wisdom_kasaragod/"><i class="fa fa-instagram"></i></a></li>
-              <li class="list-inline-item"><a href="https://www.youtube.com/channel/UCTOHC_slC8EZdZLBlSWODKw"><i class="fa fa-youtube"></i></a></li>
-              <li class="list-inline-item"><a href="https://www.facebook.com/WisdomKasaragodDist/"><i class="fa fa-facebook"></i></a></li>
-            </ul>
-          </footer>
+            <!-- Registration Modal -->
+            <div
+                class="modal fade"
+                id="registrationModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="registrationModalLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="registrationModalLabel">
+                                Registration Form
+                            </h5>
+                            <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                            >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <!-- Loading/Success/Error screen -->
+                        <div
+                            class="modal-body text-center"
+                            id="secondary-disp"
+                            style="display: none"
+                        ></div>
+
+                        <!-- Main Screen -->
+                        <div class="modal-body" id="main-disp">
+                            <div class="text-center">
+                                <button
+                                    type="button"
+                                    class="btn btn-primary mt-2"
+                                    onclick="selectRegistrationType('individual')"
+                                >
+                                    Individual Registration
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-primary mt-2"
+                                    onclick="selectRegistrationType('family')"
+                                >
+                                    Family Registration
+                                </button>
+                            </div>
+
+                            <form id="registrationForm" style="display: none">
+                                <div id="familyFields" style="display: none">
+                                    <div class="form-group">
+                                        <label for="unit">Place:</label>
+                                        <select
+                                            class="form-control selectpicker"
+                                            data-live-search="true"
+                                            id="unit"
+                                            required
+                                        ></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="transportMode"
+                                            >Transport Mode:</label
+                                        >
+                                        <select
+                                            class="form-control"
+                                            id="transportMode"
+                                            required
+                                        >
+                                            <option value="Public Transport">
+                                                Public Transport
+                                            </option>
+                                            <option value="Private Transport">
+                                                Private Transport
+                                            </option>
+                                            <option
+                                                value="Transport assistance required"
+                                            >
+                                                Transport assistance required
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="numberOfMembers"
+                                            >No. of Members</label
+                                        >
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="numberOfMembers"
+                                            required
+                                            oninput="updateFamilyMembersDetails()"
+                                        />
+                                    </div>
+                                    <div id="familyMembersDetails"></div>
+                                </div>
+
+                                <div
+                                    id="individualFields"
+                                    style="display: none"
+                                >
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="name"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="age">Age:</label>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="age"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contact">Contact:</label>
+                                        <input
+                                            type="tel"
+                                            class="form-control"
+                                            id="contact"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="iwisdomMember"
+                                            >Wisdom Member:</label
+                                        >
+                                        <select
+                                            class="form-control"
+                                            id="iwisdomMember"
+                                        >
+                                            <option value="true">Yes</option>
+                                            <option value="false">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="iunit">Place:</label>
+                                        <select
+                                            class="form-control selectpicker"
+                                            data-live-search="true"
+                                            id="iunit"
+                                            required
+                                        ></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="itransportMode"
+                                            >Transport Mode:</label
+                                        >
+                                        <select
+                                            class="form-control"
+                                            id="itransportMode"
+                                            required
+                                        >
+                                            <option value="Public Transport">
+                                                Public Transport
+                                            </option>
+                                            <option value="Private Transport">
+                                                Private Transport
+                                            </option>
+                                            <option
+                                                value="Transport assistance required"
+                                            >
+                                                Transport assistance required
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    onclick="submitForm()"
+                                >
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="pt-3 pb-2 text-muted text-center text-small">
+                <p class="mb-1">
+                    © 2023 Wisdom Kasaragod | made by
+                    <a href="https://zameel7.me">zameel7</a>
+                </p>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/wisdom_kasaragod/"
+                            ><i class="fa fa-instagram"></i
+                        ></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a
+                            href="https://www.youtube.com/channel/UCTOHC_slC8EZdZLBlSWODKw"
+                            ><i class="fa fa-youtube"></i
+                        ></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/WisdomKasaragodDist/"
+                            ><i class="fa fa-facebook"></i
+                        ></a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
 
         <!-- JS -->
         <script src="static/js/main.js"></script>
