@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
         ].filter((feature) => typeof app[feature] === "function");
 
         db = firebase.firestore();
-
     } catch (e) {
         console.error(e);
     }
@@ -25,31 +24,75 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Your list of units
 const units = [
-    'MIYAPADAV', 'ARIMALA', 'UPPALA', 'KUNJATHTHUR', 'KADAMBAR',
-    'PAIVELIKA', 'MACHAMPADY', 'HOSANGADI', 'VORKADY', 'BANDIYOD',
-    'MOGRAL', 'ARIKKADY', 'PATLA', 'CHOWKI', 'MOGRAL PUTHUR',
-    'KALLAKKATTA', 'PERIYADKKA', 'SP NAGAR', 'BC ROAD', 'ANANGOOR',
-    'KASARAGOD TOWN', 'THALANGARA', 'CHOORI', 'BOVIKKANAM', 'CHERKALA',
-    'BEVINJE', 'POVVAL', 'MAASTHIKKUND', 'ADOOR', 'ANGADI MUGAR',
-    'NEERCHAL', 'PERLA', 'BADIYADUKKA', 'KOMBANADUKKAM', 'PARAVANADUKKAM',
-    'CHEMANAD', 'UDUMA PADINJAR', 'MELPARAMB', 'KALANAD', 'PALOTH',
-    'KEEZHOOR', 'KUTTIKKOL', 'HOSDURG', 'KOOLIYANGAL', 'PALLIKKARA',
-    'NEELESHWARAM', 'AJANUR', 'KOLAVAYAL', 'KALLOORAVI', 'PARAPPA',
-    'THRIKKARIPPUR', 'ORIMUKK', 'CHERUVATHTHUR', 'PERUMBATTA', 'PADANNA'
+    "MIYAPADAV",
+    "ARIMALA",
+    "UPPALA",
+    "KUNJATHTHUR",
+    "KADAMBAR",
+    "PAIVELIKA",
+    "MACHAMPADY",
+    "HOSANGADI",
+    "VORKADY",
+    "BANDIYOD",
+    "MOGRAL",
+    "ARIKKADY",
+    "PATLA",
+    "CHOWKI",
+    "MOGRAL PUTHUR",
+    "KALLAKKATTA",
+    "PERIYADKKA",
+    "SP NAGAR",
+    "BC ROAD",
+    "ANANGOOR",
+    "KASARAGOD TOWN",
+    "THALANGARA",
+    "CHOORI",
+    "BOVIKKANAM",
+    "CHERKALA",
+    "BEVINJE",
+    "POVVAL",
+    "MAASTHIKKUND",
+    "ADOOR",
+    "ANGADI MUGAR",
+    "NEERCHAL",
+    "PERLA",
+    "BADIYADUKKA",
+    "KOMBANADUKKAM",
+    "PARAVANADUKKAM",
+    "CHEMANAD",
+    "UDUMA PADINJAR",
+    "MELPARAMB",
+    "KALANAD",
+    "PALOTH",
+    "KEEZHOOR",
+    "KUTTIKKOL",
+    "HOSDURG",
+    "KOOLIYANGAL",
+    "PALLIKKARA",
+    "NEELESHWARAM",
+    "AJANUR",
+    "KOLAVAYAL",
+    "KALLOORAVI",
+    "PARAPPA",
+    "THRIKKARIPPUR",
+    "ORIMUKK",
+    "CHERUVATHTHUR",
+    "PERUMBATTA",
+    "PADANNA",
 ];
 
 // Function to populate the Unit select dropdown
 function populateUnitDropdown() {
-    const unitSelect = document.getElementById('unit');
-    const iunitSelect = document.getElementById('iunit');
+    const unitSelect = document.getElementById("unit");
+    const iunitSelect = document.getElementById("iunit");
 
     // Clear existing options
-    unitSelect.innerHTML = '';
+    unitSelect.innerHTML = "";
 
     // Add a default option
-    const defaultOption = document.createElement('option');
-    defaultOption.value = '';
-    defaultOption.text = 'Select Place';
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.text = "Select Place";
     defaultOption.disabled = true;
     defaultOption.selected = true;
     unitSelect.appendChild(defaultOption);
@@ -57,7 +100,7 @@ function populateUnitDropdown() {
 
     // Add options based on the list of units
     units.forEach((unit) => {
-        const option = document.createElement('option');
+        const option = document.createElement("option");
         option.value = unit;
         option.text = unit;
         unitSelect.appendChild(option);
@@ -95,7 +138,7 @@ function updateFamilyMembersDetails() {
     for (var i = 0; i < numberOfMembers; i++) {
         var memberDetails = document.createElement("div");
         memberDetails.innerHTML =
-            `<h5>Family Member ${i+1}` +
+            `<h5>Family Member ${i + 1}` +
             ":</h5>" +
             "<div class='form-group'><label for='name" +
             i +
@@ -126,7 +169,7 @@ function updateFamilyMembersDetails() {
 function submitForm() {
     // Show loading screen in the modal
     showLoadingScreen();
-    
+
     try {
         if (type === "individual") {
             const name = document.getElementById("name").value;
@@ -140,21 +183,22 @@ function submitForm() {
                 document.getElementById("itransportMode").value;
 
             // Check if a place is selected
-            if (unit === '') {
-                alert('Please select a place.');
+            if (unit === "") {
+                alert("Please select a place.");
                 document.getElementById("main-disp").style.display = "block";
-                document.getElementById("secondary-disp").style.display = "none";
+                document.getElementById("secondary-disp").style.display =
+                    "none";
                 return;
             }
 
             // Validate mobile number
             if (!validateMobileNumber(contact)) {
-                alert('Please enter a valid mobile number.');
+                alert("Please enter a valid mobile number.");
                 document.getElementById("main-disp").style.display = "block";
-                document.getElementById("secondary-disp").style.display = "none";
+                document.getElementById("secondary-disp").style.display =
+                    "none";
                 return;
             }
-
 
             // Generate a unique 5-digit registration number
             generateUniqueRegistrationNumber()
@@ -175,13 +219,15 @@ function submitForm() {
                             zone: zone,
                             wisdomMember: wisdomMember,
                             transportMode: transportMode,
-                            isFamily: false
+                            isFamily: false,
                         })
                         .then(() => {
-                            db.collection("regno").doc(`${registrationNumber}`).set({
-                                regNo: registrationNumber,
-                                attendance: false
-                            })
+                            db.collection("regno")
+                                .doc(`${registrationNumber}`)
+                                .set({
+                                    regNo: registrationNumber,
+                                    attendance: false,
+                                });
                             showSuccessScreen([
                                 {
                                     name: name,
@@ -203,14 +249,16 @@ function submitForm() {
             const zone = getZoneByUnit(unit);
             const transportMode =
                 document.getElementById("transportMode").value;
-            const numberOfMembers =
-                parseInt(document.getElementById("numberOfMembers").value);
+            const numberOfMembers = parseInt(
+                document.getElementById("numberOfMembers").value
+            );
 
             // Check if a place is selected
-            if (unit === '') {
-                alert('Please select a place.');
+            if (unit === "") {
+                alert("Please select a place.");
                 document.getElementById("main-disp").style.display = "block";
-                document.getElementById("secondary-disp").style.display = "none";
+                document.getElementById("secondary-disp").style.display =
+                    "none";
                 return;
             }
 
@@ -218,13 +266,17 @@ function submitForm() {
             const familyMembers = [];
 
             for (let i = 0; i < numberOfMembers; i++) {
-                const memberContact = document.getElementById(`contact${i}`).value;
-    
+                const memberContact = document.getElementById(
+                    `contact${i}`
+                ).value;
+
                 // Validate mobile number
                 if (!validateMobileNumber(memberContact)) {
-                    alert('Please enter a valid mobile number.');
-                    document.getElementById("main-disp").style.display = "block";
-                    document.getElementById("secondary-disp").style.display = "none";
+                    alert("Please enter a valid mobile number.");
+                    document.getElementById("main-disp").style.display =
+                        "block";
+                    document.getElementById("secondary-disp").style.display =
+                        "none";
                     return;
                 }
             }
@@ -233,57 +285,70 @@ function submitForm() {
             generateUniqueRegistrationNumber()
                 .then((memberRegistrationNumber) => {
                     for (let i = 0; i < numberOfMembers; i++) {
-                        const memberName = document.getElementById(`name${i}`).value;
-                        const memberAge = document.getElementById(`age${i}`).value;
-                        const memberContact = document.getElementById(`contact${i}`).value;
-                        const memberWisdomMember = document.getElementById(`wisdomMember${i}`).value === "true";
+                        const memberName = document.getElementById(
+                            `name${i}`
+                        ).value;
+                        const memberAge = document.getElementById(
+                            `age${i}`
+                        ).value;
+                        const memberContact = document.getElementById(
+                            `contact${i}`
+                        ).value;
+                        const memberWisdomMember =
+                            document.getElementById(`wisdomMember${i}`)
+                                .value === "true";
 
-                        const regNo = i !== 0 ? `${memberRegistrationNumber}_${i}` : memberRegistrationNumber;
+                        const regNo =
+                            i !== 0
+                                ? `${memberRegistrationNumber}_${i}`
+                                : memberRegistrationNumber;
 
                         // Add family member data to Firestore with custom document ID
                         db.collection("registrations")
-                        .doc(`${memberRegistrationNumber}_${i+1}`)
-                        .set({
-                            name: memberName,
-                            age: memberAge,
-                            contact: memberContact,
-                            isFamily: true,
-                            unit: unit,
-                            zone: zone,
-                            transportMode: transportMode,
-                            numberOfMembers: numberOfMembers,
-                            wisdomMember: memberWisdomMember
-                        })
-                        .then(() => {
-                            db.collection("regno").doc(`${regNo}`).set({
-                                regNo: regNo
+                            .doc(`${memberRegistrationNumber}_${i + 1}`)
+                            .set({
+                                name: memberName,
+                                age: memberAge,
+                                contact: memberContact,
+                                isFamily: true,
+                                unit: unit,
+                                zone: zone,
+                                transportMode: transportMode,
+                                numberOfMembers: numberOfMembers,
+                                wisdomMember: memberWisdomMember,
                             })
-                            if (i === 0) {
-                                // Add the head of the family to the list of family members
-                                familyMembers.push({
-                                    name: memberName,
-                                    registrationNumber: memberRegistrationNumber,
+                            .then(() => {
+                                db.collection("regno").doc(`${regNo}`).set({
+                                    regNo: regNo,
                                 });
-                            } else {
-                                familyMembers.push({
-                                    name: memberName,
-                                    registrationNumber:
-                                        `${memberRegistrationNumber}_${i}`,
-                                });
-                            }
-                            console.log("Family member added successfully");
-                        })
-                        .catch((error) => {
-                            console.error(
-                                `Error adding family member document of ${memberRegistrationNumber}_${i+1}: `,
-                                error
-                            );
-                        })
-                        .finally(() => {
-                            // Show success screen only after all family members have been added
-                            if (familyMembers.length === numberOfMembers)
-                                showSuccessScreen(familyMembers);
-                        });
+                                if (i === 0) {
+                                    // Add the head of the family to the list of family members
+                                    familyMembers.push({
+                                        name: memberName,
+                                        registrationNumber:
+                                            memberRegistrationNumber,
+                                    });
+                                } else {
+                                    familyMembers.push({
+                                        name: memberName,
+                                        registrationNumber: `${memberRegistrationNumber}_${i}`,
+                                    });
+                                }
+                                console.log("Family member added successfully");
+                            })
+                            .catch((error) => {
+                                console.error(
+                                    `Error adding family member document of ${memberRegistrationNumber}_${
+                                        i + 1
+                                    }: `,
+                                    error
+                                );
+                            })
+                            .finally(() => {
+                                // Show success screen only after all family members have been added
+                                if (familyMembers.length === numberOfMembers)
+                                    showSuccessScreen(familyMembers);
+                            });
                     }
                 })
                 .catch((error) => {
@@ -307,9 +372,7 @@ async function generateUniqueRegistrationNumber() {
 
         try {
             // Check if the generated number already exists in Firestore
-            const docRef = db
-                .collection("regno")
-                .doc(`${registrationNumber}`);
+            const docRef = db.collection("regno").doc(`${registrationNumber}`);
             const docSnapshot = await docRef.get();
 
             if (!docSnapshot.exists) {
@@ -342,11 +405,13 @@ function showLoadingScreen() {
 }
 
 function showSuccessScreen(registrationDetails) {
-    registrationDetails = registrationDetails || [{ name: "Test", registrationNumber: "12345"}];
+    registrationDetails = registrationDetails || [
+        { name: "Test", registrationNumber: "12345" },
+    ];
     // Update modal content to show a success screen
     document.getElementById("main-disp").style.display = "none";
     document.getElementById("secondary-disp").style.display = "block";
-    
+
     const successContent = `
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading font-weight-bold">Your Registration is Completed!</h4>
@@ -365,24 +430,28 @@ function showSuccessScreen(registrationDetails) {
             <button type="button" class="btn btn-primary mt-2" onclick="window.location.href = 'https://chat.whatsapp.com/GvlImRUMb2lLBXaslgw7hY'">Join WhatsApp Group</button>
             <button type="button" class="btn btn-primary mt-2" onclick="formReset()">Register More</button>
             <button type="button" class="btn btn-primary mt-2" onclick="downloadAsPNG()">Download Ticket</button>
+            <button type="button" class="btn btn-outline-success mt-2" onclick="downloadAsPNG(true)"><i class="fa fa-whatsapp"></i></button>
         </div>
     `;
 
-    document.getElementById("registrationModalLabel").innerText = "Registration Successful!";
+    document.getElementById("registrationModalLabel").innerText =
+        "Registration Successful!";
     document.getElementById("secondary-disp").innerHTML = successContent;
 
     const QRElement = document.getElementById("qrcode-container");
-    
+
     new QRCode(QRElement, {
         text: JSON.stringify(registrationDetails),
         width: 100,
         height: 100,
-        colorDark : "black",
-        colorLight : "#d4edda",
+        colorDark: "black",
+        colorLight: "#d4edda",
     });
 
     const detailsList = document.getElementById("registrationDetailsList");
-    const detailsListTicket = document.getElementById("registrationDetailsListTicket");
+    const detailsListTicket = document.getElementById(
+        "registrationDetailsListTicket"
+    );
 
     registrationDetails.forEach((detail) => {
         const listItem = document.createElement("li");
@@ -393,7 +462,7 @@ function showSuccessScreen(registrationDetails) {
     });
 }
 
-function downloadAsPNG() {
+function downloadAsPNG(whatsappShare = false) {
     // Get the content of the "registrationDetailsList" element
     const content = document.getElementById("ticket");
     content.style.display = "block";
@@ -417,12 +486,27 @@ function downloadAsPNG() {
         // Trigger a click on the link to initiate the download
         link.click();
 
+        if (whatsappShare) {
+            text = `
+            *Wisdom Kasaragod Family Conference 2024*
+_May 12, Sunday, 4:00 PM | Kanhangad_
+ഞാൻ രജിസ്റ്റർ ചെയ്തു!
+രജിസ്റ്റർ ചെയ്യാനായി ഈ ലിങ്കിൽ ക്ലിക്ക് ചെയ്യൂ
+https://wisdom-fam-conf.web.app
+*ഹുസൈൻ സലഫി, ടി കെ അഷ്‌റഫ്, ഹാരിസ് ബിൻ സലിം മുതലായവർ പങ്കെടുക്കുന്നു*
+            `;
+
+            window.open(
+                `whatsapp://send?text=${encodeURIComponent(text)}`,
+                "_blank"
+            );
+        }
+
         // Remove the link from the document
         document.body.removeChild(link);
     });
     content.style.display = "none";
 }
-
 
 function showErrorScreen() {
     // Update modal content to show an error screen
@@ -447,68 +531,69 @@ function showErrorScreen() {
 function formReset() {
     // Reset the form to its initial state
     document.getElementById("registrationForm").reset();
-    document.getElementById("registrationModalLabel").innerText = "Registration Form";
+    document.getElementById("registrationModalLabel").innerText =
+        "Registration Form";
     document.getElementById("main-disp").style.display = "block";
     document.getElementById("secondary-disp").style.display = "none";
 }
 
 function getZoneByUnit(unit) {
     const zoneMapping = {
-        'MIYAPADAV': 'Manjeshwar',
-        'ARIMALA': 'Manjeshwar',
-        'UPPALA': 'Manjeshwar',
-        'KUNJATHTHUR': 'Manjeshwar',
-        'KADAMBAR': 'Manjeshwar',
-        'PAIVELIKA': 'Manjeshwar',
-        'MACHAMPADY': 'Manjeshwar',
-        'HOSANGADI': 'Manjeshwar',
-        'VORKADY': 'Manjeshwar',
-        'BANDIYOD': 'Manjeshwar',
-        'MOGRAL': 'Kumbala',
-        'ARIKKADY': 'Kumbala',
-        'PATLA': 'Kumbala',
-        'CHOWKI': 'Kumbala',
-        'MOGRAL PUTHUR': 'Kumbala',
-        'KALLAKKATTA': 'Kumbala',
-        'PERIYADKKA': 'Kumbala',
-        'SP NAGAR': 'Kasaragod',
-        'BC ROAD': 'Kasaragod',
-        'ANANGOOR': 'Kasaragod',
-        'KASARAGOD TOWN': 'Kasaragod',
-        'THALANGARA': 'Kasaragod',
-        'CHOORI': 'Kasaragod',
-        'BOVIKKANAM': 'Cherkala',
-        'CHERKALA': 'Cherkala',
-        'BEVINJE': 'Cherkala',
-        'POVVAL': 'Cherkala',
-        'MAASTHIKKUND': 'Cherkala',
-        'ADOOR': 'Cherkala',
-        'ANGADI MUGAR': 'Badiyadukka',
-        'NEERCHAL': 'Badiyadukka',
-        'PERLA': 'Badiyadukka',
-        'BADIYADUKKA': 'Badiyadukka',
-        'KOMBANADUKKAM': 'Uduma',
-        'PARAVANADUKKAM': 'Uduma',
-        'CHEMANAD': 'Uduma',
-        'UDUMA PADINJAR': 'Uduma',
-        'MELPARAMB': 'Uduma',
-        'KALANAD': 'Uduma',
-        'PALOTH': 'Uduma',
-        'KEEZHOOR': 'Uduma',
-        'KUTTIKKOL': 'Uduma',
-        'HOSDURG': 'Kanhangad',
-        'KOOLIYANGAL': 'Kanhangad',
-        'PALLIKKARA': 'Kanhangad',
-        'NEELESHWARAM': 'Kanhangad',
-        'AJANUR': 'Kanhangad',
-        'KOLAVAYAL': 'Kanhangad',
-        'KALLOORAVI': 'Kanhangad',
-        'PARAPPA': 'Kanhangad',
-        'THRIKKARIPPUR': 'Trikkaripur',
-        'ORIMUKK': 'Trikkaripur',
-        'CHERUVATHTHUR': 'Trikkaripur',
-        'PERUMBATTA': 'Trikkaripur',
-        'PADANNA': 'Trikkaripur'
+        MIYAPADAV: "Manjeshwar",
+        ARIMALA: "Manjeshwar",
+        UPPALA: "Manjeshwar",
+        KUNJATHTHUR: "Manjeshwar",
+        KADAMBAR: "Manjeshwar",
+        PAIVELIKA: "Manjeshwar",
+        MACHAMPADY: "Manjeshwar",
+        HOSANGADI: "Manjeshwar",
+        VORKADY: "Manjeshwar",
+        BANDIYOD: "Manjeshwar",
+        MOGRAL: "Kumbala",
+        ARIKKADY: "Kumbala",
+        PATLA: "Kumbala",
+        CHOWKI: "Kumbala",
+        "MOGRAL PUTHUR": "Kumbala",
+        KALLAKKATTA: "Kumbala",
+        PERIYADKKA: "Kumbala",
+        "SP NAGAR": "Kasaragod",
+        "BC ROAD": "Kasaragod",
+        ANANGOOR: "Kasaragod",
+        "KASARAGOD TOWN": "Kasaragod",
+        THALANGARA: "Kasaragod",
+        CHOORI: "Kasaragod",
+        BOVIKKANAM: "Cherkala",
+        CHERKALA: "Cherkala",
+        BEVINJE: "Cherkala",
+        POVVAL: "Cherkala",
+        MAASTHIKKUND: "Cherkala",
+        ADOOR: "Cherkala",
+        "ANGADI MUGAR": "Badiyadukka",
+        NEERCHAL: "Badiyadukka",
+        PERLA: "Badiyadukka",
+        BADIYADUKKA: "Badiyadukka",
+        KOMBANADUKKAM: "Uduma",
+        PARAVANADUKKAM: "Uduma",
+        CHEMANAD: "Uduma",
+        "UDUMA PADINJAR": "Uduma",
+        MELPARAMB: "Uduma",
+        KALANAD: "Uduma",
+        PALOTH: "Uduma",
+        KEEZHOOR: "Uduma",
+        KUTTIKKOL: "Uduma",
+        HOSDURG: "Kanhangad",
+        KOOLIYANGAL: "Kanhangad",
+        PALLIKKARA: "Kanhangad",
+        NEELESHWARAM: "Kanhangad",
+        AJANUR: "Kanhangad",
+        KOLAVAYAL: "Kanhangad",
+        KALLOORAVI: "Kanhangad",
+        PARAPPA: "Kanhangad",
+        THRIKKARIPPUR: "Trikkaripur",
+        ORIMUKK: "Trikkaripur",
+        CHERUVATHTHUR: "Trikkaripur",
+        PERUMBATTA: "Trikkaripur",
+        PADANNA: "Trikkaripur",
     };
 
     return zoneMapping[unit];
