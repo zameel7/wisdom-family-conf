@@ -37,6 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
             var tableBody = document.getElementById("registrationTableBody");
 
             var row = document.createElement("tr");
+
+            row.id = `row_${registrationNo}`;
             row.innerHTML = `
             <td>${registrationNo}</td>
             <td>${data.name}</td>
@@ -47,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <td>${data.unit}</td>
             <td>${data.isFamily ? "Yes" : "No"}</td>
             <td>${data.wisdomMember ? "Yes" : "No"}</td>
+            <td><button class="btn btn-danger" onclick="deleteEntry('${registrationNo}')"><i class="fa fa-times"></i></button></td>
         `;
 
             tableBody.appendChild(row);
@@ -135,12 +138,11 @@ document.addEventListener("DOMContentLoaded", function () {
 function markAttendance(registrationNumber) {
     try {
         var db = firebase.firestore();
-        db.collection("regno").doc(Number(registrationNumber)).set(
+        db.collection("regno").doc(`${registrationNumber}`).set(
             {attendance: true},{ merge: true }
         )
         .then(() => {
-            // show bootstrap toast with success message
-
+            alert("Attendance marked successfully");
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
@@ -148,6 +150,24 @@ function markAttendance(registrationNumber) {
     } catch (e) {
         console.error(`Error marking attendance for ${registrationNumber}`, e);
     }   
+}
+
+// Function to delete a registration entry
+function deleteEntry(registrationNo) {
+    var db = firebase.firestore();
+    db.collection("registrations")
+        .doc(`${registrationNo}`)
+        .delete()
+        .then(function () {
+            db.collection("regno").doc(`${registrationNo}`).delete().then(() => {
+                // remove the row from the table
+                var row = document.getElementById(`row_${registrationNo}`);
+                row.parentNode.removeChild(row);
+            })
+        })
+        .catch(function (error) {
+            console.error("Error removing document: ", error);
+        });
 }
 
 // Logout function
