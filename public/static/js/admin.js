@@ -114,7 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     var result = JSON.parse(decodeText);
                     result.forEach((data) => {
                         const registrationNumber = data.registrationNumber;
-                        console.log(registrationNumber);
                         if (registrationNumber) {
                             markAttendance(registrationNumber);
                         }
@@ -134,14 +133,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function markAttendance(registrationNumber) {
-    var db = firebase.firestore();
-    db.collection("regno").doc(registrationNumber).set(
-        {attendance: true,},{ merge: true }
-    )
-    .then(alert("Attendance marked successfully"))
-    .catch((error) => {
-        console.error("Error writing document: ", error);
-    });
+    try {
+        var db = firebase.firestore();
+        db.collection("regno").doc(Number(registrationNumber)).set(
+            {attendance: true},{ merge: true }
+        )
+        .then(() => {
+            // show bootstrap toast with success message
+
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
+    } catch (e) {
+        console.error(`Error marking attendance for ${registrationNumber}`, e);
+    }   
 }
 
 // Logout function

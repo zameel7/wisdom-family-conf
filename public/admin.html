@@ -165,7 +165,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <button
-                            class="btn btn-primary mr-2"
+                            class="btn btn-primary mr-2 mb-2"
                             data-toggle="modal"
                             data-target="#attendanceModal"
                         >
@@ -173,7 +173,7 @@
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-danger" onclick="logout()">
+                        <button class="btn btn-danger mb-2" onclick="logout()">
                             Logout
                         </button>
                     </li>
@@ -224,17 +224,17 @@
             </div>
             <div class="row my-2">
                 <!-- Mark attendance by registration Number -->
-                <div class="col-lg-4 d-flex">
+                <div class="col-lg-4 col-sm-2 d-flex">
                     <input
                         type="number"
-                        class="form-control"
+                        class="form-control mb-2"
                         placeholder="Registration Number"
                         id="registrationNumber"
                     />
                 </div>
                 <div class="col-lg-2">
                     <button
-                        class="btn btn-outline-secondary ml-2"
+                        class="btn btn-outline-secondary ml-2 mb-2"
                         type="button"
                         onclick="markAttendance(document.getElementById('registrationNumber').value)"
                     >
